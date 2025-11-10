@@ -250,8 +250,7 @@ async function handleSendMessage() {
     } else {
       setTimeout(() => {
         hideTypingIndicator();
-        addBotMessage(generateBotResponse(message));
-        updateRecommendationPrompt();
+        addBotMessage('You have not config the AI. Please go to <a href="settings.html">Settings</a>.');
       }, 1000 + Math.random() * 1000);
     }
   } catch (e) {
@@ -271,7 +270,11 @@ function displayMessage(text, sender, animate = true) {
   if (!animate) messageDiv.style.animation = "none";
   const bubbleDiv = document.createElement("div");
   bubbleDiv.className = "message-bubble";
-  bubbleDiv.textContent = text;
+  if (sender === "bot") {
+    bubbleDiv.innerHTML = text;
+  } else {
+    bubbleDiv.textContent = text;
+  }
   messageDiv.appendChild(bubbleDiv);
   chatMessages.appendChild(messageDiv);
   chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -511,10 +514,47 @@ async function getAIResponse(userMessage) {
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    // Provider-aware routing (OpenRouter / OpenAI-compatible / Deepseek)
+    const provider = localStorage.getItem("mindfulU_provider") || "openrouter";
+    const baseUrlPref = localStorage.getItem("mindfulU_baseUrl") || (provider === "deepseek" ? "https://api.deepseek.com/v1" : "");
+    const selectedModel = localStorage.getItem("mindfulU_model")
+      || (provider === "openrouter" ? "deepseek/deepseek-chat-v3-0324:free" : (provider === "deepseek" ? "deepseek-chat" : "gpt-4o-mini"));
+
+    let url, headers, body;
+    if (provider === "openrouter") {
+      url = "https://openrouter.ai/api/v1/chat/completions";
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+        "HTTP-Referer": "https://mindfulu.local",
+        "X-Title": "MindfulU"
+      };
+      body = {
+        model: selectedModel,
+        provider: { allow_fallbacks: true },
+        messages,
+        max_tokens: 500,
+        temperature: 0.8
+      };
+    } else {
+      const base = (baseUrlPref || (provider === "deepseek" ? "https://api.deepseek.com/v1" : "https://api.openai.com/v1")).replace(/\/+$/, "");
+      url = `${base}/chat/completions`;
+      headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      };
+      body = {
+        model: selectedModel,
+        messages,
+        max_tokens: 500,
+        temperature: 0.8
+      };
+    }
+
+    const response = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${apiKey}`, "HTTP-Referer": "https://mindfulu.local", "X-Title": "MindfulU" },
-      body: JSON.stringify({ model: localStorage.getItem("mindfulU_model") || "deepseek/deepseek-chat-v3-0324:free", provider: { allow_fallbacks: true }, messages, max_tokens: 500, temperature: 0.8 }),
+      headers,
+      body: JSON.stringify(body),
       signal: controller.signal
     });
     clearTimeout(timeoutId);
@@ -1194,14 +1234,9 @@ async function handleSendMessage() {
         updateRecommendationPrompt();
       }
     } else {
-      // Use rule-based response
       setTimeout(() => {
-        const response = generateBotResponse(message);
         hideTypingIndicator();
-        addBotMessage(response);
-
-        // Generate a simple recommendation prompt for rule-based
-        updateRecommendationPrompt();
+        addBotMessage('You have not config the AI. Please go to <a href="settings.html">Settings</a>.');
       }, 1000 + Math.random() * 1000);
     }
   } catch (error) {
@@ -1351,31 +1386,53 @@ async function getAIResponse(userMessage) {
   const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
   try {
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-          // Use stable referer like in validation
-          "HTTP-Referer": "https://mindfulu.local",
-          "X-Title": "MindfulU",
-        },
-        body: JSON.stringify({
-          // Use the user-selected model for chat
-          model:
-            localStorage.getItem("mindfulU_model") ||
-            "deepseek/deepseek-chat-v3-0324:free",
-          // Enable fallbacks in chat calls to reduce 429 from a single provider
-          provider: { allow_fallbacks: true },
-          messages: messages,
-          max_tokens: 500,
-          temperature: 0.8,
-        }),
-        signal: controller.signal
-      }
-    );
+    // Provider-aware routing (OpenRouter / OpenAI-compatible / Deepseek)
+    const provider = localStorage.getItem("mindfulU_provider") || "openrouter";
+    const baseUrlPref = localStorage.getItem("mindfulU_baseUrl") || (provider === "deepseek" ? "https://api.deepseek.com/v1" : "");
+    const selectedModel =
+      localStorage.getItem("mindfulU_model") ||
+      (provider === "openrouter" ? "deepseek/deepseek-chat-v3-0324:free" : (provider === "deepseek" ? "deepseek-chat" : "gpt-4o-mini"));
+
+    let url, headers, body;
+    if (provider === "openrouter") {
+      url = "https://openrouter.ai/api/v1/chat/completions";
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+        // Use stable referer like in validation
+        "HTTP-Referer": "https://mindfulu.local",
+        "X-Title": "MindfulU",
+      };
+      body = {
+        // Use the user-selected model for chat
+        model: selectedModel,
+        // Enable fallbacks in chat calls to reduce 429 from a single provider
+        provider: { allow_fallbacks: true },
+        messages: messages,
+        max_tokens: 500,
+        temperature: 0.8,
+      };
+    } else {
+      const base = (baseUrlPref || (provider === "deepseek" ? "https://api.deepseek.com/v1" : "https://api.openai.com/v1")).replace(/\/+$/, "");
+      url = `${base}/chat/completions`;
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      };
+      body = {
+        model: selectedModel,
+        messages: messages,
+        max_tokens: 500,
+        temperature: 0.8,
+      };
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+      signal: controller.signal
+    });
 
     clearTimeout(timeoutId);
 
@@ -1508,7 +1565,11 @@ function displayMessage(text, sender, animate = true) {
 
   const bubbleDiv = document.createElement("div");
   bubbleDiv.className = "message-bubble";
-  bubbleDiv.textContent = text;
+  if (sender === "bot") {
+    bubbleDiv.innerHTML = text;
+  } else {
+    bubbleDiv.textContent = text;
+  }
 
   messageDiv.appendChild(bubbleDiv);
   chatMessages.appendChild(messageDiv);

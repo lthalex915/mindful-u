@@ -546,22 +546,26 @@ async function handleChatSend() {
             }
         } else {
             setTimeout(() => {
-                const response = generateSimpleChatResponse(message);
                 hideChatTypingIndicator();
-                
+                const response = 'You have not config the AI. Please go to <a href="settings.html">Settings</a>.';
                 ChatManager.addMessage(response, 'bot');
                 displayChatMessage(response, 'bot', true);
-                updateRecommendationPrompt();
             }, 1000 + Math.random() * 1000);
         }
     } catch (error) {
         console.error('Chat error:', error);
         hideChatTypingIndicator();
         
-        const response = generateSimpleChatResponse(message);
-        ChatManager.addMessage(response, 'bot');
-        displayChatMessage(response, 'bot', true);
-        updateRecommendationPrompt();
+        if (!ChatManager.isAIEnabled() || !ChatManager.getApiKey()) {
+            const response = 'You have not config the AI. Please go to <a href="settings.html">Settings</a>.';
+            ChatManager.addMessage(response, 'bot');
+            displayChatMessage(response, 'bot', true);
+        } else {
+            const response = generateSimpleChatResponse(message);
+            ChatManager.addMessage(response, 'bot');
+            displayChatMessage(response, 'bot', true);
+            updateRecommendationPrompt();
+        }
     } finally {
         chatPopupSendBtn.disabled = false;
         chatPopupInput.disabled = false;
@@ -605,21 +609,48 @@ async function getAIResponse(userMessage, emotionSnapshot) {
     const timeoutId = setTimeout(() => controller.abort(), 30000);
     
     try {
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
+        // Provider-aware routing (OpenRouter / OpenAI-compatible / Deepseek)
+        const provider = localStorage.getItem('mindfulU_provider') || 'openrouter';
+        const baseUrlPref = localStorage.getItem('mindfulU_baseUrl') || (provider === 'deepseek' ? 'https://api.deepseek.com/v1' : '');
+        const selectedModel =
+            localStorage.getItem('mindfulU_model') ||
+            (provider === 'openrouter' ? 'deepseek/deepseek-chat-v3-0324:free' : (provider === 'deepseek' ? 'deepseek-chat' : 'gpt-4o-mini'));
+
+        let url, headers, body;
+        if (provider === 'openrouter') {
+            url = 'https://openrouter.ai/api/v1/chat/completions';
+            headers = {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${ChatManager.getApiKey()}`,
                 'HTTP-Referer': 'https://mindfulu.local',
                 'X-Title': 'MindfulU'
-            },
-            body: JSON.stringify({
-                model: localStorage.getItem('mindfulU_model') || 'deepseek/deepseek-chat-v3-0324:free',
+            };
+            body = {
+                model: selectedModel,
                 provider: { allow_fallbacks: true },
                 messages: messages,
                 max_tokens: 500,
                 temperature: 0.8
-            }),
+            };
+        } else {
+            const base = (baseUrlPref || (provider === 'deepseek' ? 'https://api.deepseek.com/v1' : 'https://api.openai.com/v1')).replace(/\/+$/, '');
+            url = `${base}/chat/completions`;
+            headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ChatManager.getApiKey()}`
+            };
+            body = {
+                model: selectedModel,
+                messages: messages,
+                max_tokens: 500,
+                temperature: 0.8
+            };
+        }
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
             signal: controller.signal
         });
         
@@ -822,6 +853,11 @@ function getCurrentEmotions() {
 }
 
 function generateSimpleChatResponse(message) {
+    // Check if AI is configured
+    if (!ChatManager.isAIEnabled() || !ChatManager.getApiKey()) {
+        return 'You have not config the AI. Please go to <a href="settings.html">Settings</a>.';
+    }
+    
     const stressPercentage = document.getElementById('stressPercentage');
     const stressLevel = parseInt(stressPercentage?.textContent) || 0;
     const emotions = getCurrentEmotions();
@@ -870,7 +906,11 @@ function displayChatMessage(text, sender, animate = true) {
     
     const bubbleDiv = document.createElement('div');
     bubbleDiv.className = 'message-bubble';
-    bubbleDiv.textContent = text;
+    if (sender === 'bot') {
+        bubbleDiv.innerHTML = text;
+    } else {
+        bubbleDiv.textContent = text;
+    }
     
     messageDiv.appendChild(bubbleDiv);
     chatPopupMessagesContainer.appendChild(messageDiv);
