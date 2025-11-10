@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification System Demo - MindfulU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="notification.css">
+    <style>
+        body {
+            font-family: "Ubuntu Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-primary);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 12px 12px 24px var(--shadow-dark),
+                -12px -12px 24px var(--shadow-light);
+        }
+
+        h1 {
+            font-family: "Instrument Serif", Georgia, serif;
+            font-size: 36px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .demo-section {
+            margin-bottom: 32px;
+        }
+
+        .demo-section h2 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .demo-btn {
+            padding: 14px 24px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 4px 4px 10px var(--shadow-dark),
+                -2px -2px 6px var(--shadow-light);
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 12px var(--shadow-dark),
+                -3px -3px 8px var(--shadow-light);
+        }
+
+        .demo-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+        }
+
+        .btn-error {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, var(--primary), var(--accent-warm));
+            color: white;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .code-block {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-primary);
+            overflow-x: auto;
+        }
+    </style>
+    <script src="notification.js"></script>
+</head>
+<body>
+    <div class="demo-container">
+        <a href="portal.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Portal
+        </a>
+
+        <h1>Notification System Demo</h1>
+        <p class="subtitle">Test the custom notification and toast components</p>
+
+        <!-- Modal Notifications -->
+        <div class="demo-section">
+            <h2>📢 Modal Notifications</h2>
+            <div class="button-grid">
+                <button class="demo-btn btn-warning" onclick="showWarningNotification()">
+                    Warning
+                </button>
+                <button class="demo-btn btn-error" onclick="showErrorNotification()">
+                    Error
+                </button>
+                <button class="demo-btn btn-success" onclick="showSuccessNotification()">
+                    Success
+                </button>
+                <button class="demo-btn btn-info" onclick="showInfoNotification()">
+                    Info
+                </button>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div class="demo-section">
+            <h2>🍞 Toast Notifications</h2>
+            <div class="button-grid">
+                <button class="demo-btn btn-warning" onclick="showWarningToast()">
+                    Warning Toast
+                </button>
+                <button class="demo-btn btn-error" onclick="showErrorToast()">
+                    Error Toast
+                </button>
+                <button class="demo-btn btn-success" onclick="showSuccessToast()">
+                    Success Toast
+                </button>
+                <button class="demo-btn btn-info" onclick="showInfoToast()">
+                    Info Toast
+                </button>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Example -->
+        <div class="demo-section">
+            <h2>🗑️ Delete Confirmation (Real Use Case)</h2>
+            <div class="button-grid">
+                <button class="demo-btn btn-error" onclick="deleteDataExample()">
+                    Delete Data
+                </button>
+                <button class="demo-btn btn-error" onclick="clearHistoryExample()">
+                    Clear History
+                </button>
+            </div>
+        </div>
+
+        <!-- Usage Examples -->
+        <div class="demo-section">
+            <h2>💻 Usage Examples</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 12px;">
+                Here's how to use the notification system in your code:
+            </p>
+            
+            <div class="code-block">
+// Show a modal notification<br>
+showNotification({<br>
+&nbsp;&nbsp;type: 'warning',<br>
+&nbsp;&nbsp;title: 'Delete Item',<br>
+&nbsp;&nbsp;subtitle: 'This action cannot be undone',<br>
+&nbsp;&nbsp;message: 'Are you sure you want to delete this item?',<br>
+&nbsp;&nbsp;confirmText: 'Delete',<br>
+&nbsp;&nbsp;cancelText: 'Cancel',<br>
+&nbsp;&nbsp;isDanger: true,<br>
+&nbsp;&nbsp;onConfirm: () => console.log('Deleted!'),<br>
+&nbsp;&nbsp;onCancel: () => console.log('Cancelled')<br>
+});<br>
+<br>
+// Show a toast notification<br>
+showToast({<br>
+&nbsp;&nbsp;type: 'success',<br>
+&nbsp;&nbsp;title: 'Success',<br>
+&nbsp;&nbsp;message: 'Item deleted successfully',<br>
+&nbsp;&nbsp;duration: 3000<br>
+});
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Notification Examples
+        function showWarningNotification() {
+            showNotification({
+                type: 'warning',
+                title: 'Warning',
+                subtitle: 'Please review this carefully',
+                message: 'This is a warning notification. It alerts you about something that needs attention.',
+                confirmText: 'I Understand',
+                showCancel: false
+            });
+        }
+
+        function showErrorNotification() {
+            showNotification({
+                type: 'error',
+                title: 'Error Occurred',
+                subtitle: 'Something went wrong',
+                message: 'An error has occurred while processing your request. Please try again later.',
+                confirmText: 'Retry',
+                cancelText: 'Cancel',
+                onConfirm: () => showToast({ type: 'info', title: 'Retrying...', message: 'Please wait' })
+            });
+        }
+
+        function showSuccessNotification() {
+            showNotification({
+                type: 'success',
+                title: 'Success!',
+                subtitle: 'Operation completed',
+                message: 'Your action has been completed successfully. All changes have been saved.',
+                confirmText: 'Great!',
+                showCancel: false
+            });
+        }
+
+        function showInfoNotification() {
+            showNotification({
+                type: 'info',
+                title: 'Information',
+                subtitle: 'Did you know?',
+                message: 'This is an informational notification. It provides helpful context or tips.',
+                confirmText: 'Got it',
+                showCancel: false
+            });
+        }
+
+        // Toast Notification Examples
+        function showWarningToast() {
+            showToast({
+                type: 'warning',
+                title: 'Warning',
+                message: 'This is a warning toast notification',
+                duration: 3000
+            });
+        }
+
+        function showErrorToast() {
+            showToast({
+                type: 'error',
+                title: 'Error',
+                message: 'Something went wrong',
+                duration: 3000
+            });
+        }
+
+        function showSuccessToast() {
+            showToast({
+                type: 'success',
+                title: 'Success',
+                message: 'Operation completed successfully',
+                duration: 3000
+            });
+        }
+
+        function showInfoToast() {
+            showToast({
+                type: 'info',
+                title: 'Info',
+                message: 'Here is some helpful information',
+                duration: 3000
+            });
+        }
+
+        // Real Use Case Examples
+        async function deleteDataExample() {
+            const confirmed = await confirmDialog({
+                type: 'warning',
+                title: 'Delete Data',
+                subtitle: 'This action cannot be undone',
+                message: 'Are you sure you want to delete this data? All information will be permanently removed.',
+                confirmText: 'Delete',
+                cancelText: 'Cancel',
+                isDanger: true
+            });
+
+            if (confirmed) {
+                showToast({
+                    type: 'success',
+                    title: 'Deleted',
+                    message: 'Data has been deleted successfully',
+                    duration: 3000
+                });
+            } else {
+                showToast({
+                    type: 'info',
+                    title: 'Cancelled',
+                    message: 'Delete operation cancelled',
+                    duration: 2000
+                });
+            }
+        }
+
+        async function clearHistoryExample() {
+            const confirmed = await confirmDialog({
+                type: 'warning',
+                title: 'Clear History',
+                subtitle: 'This will remove all your chat history',
+                message: 'Are you sure you want to clear all chat history? This action cannot be undone.',
+                confirmText: 'Clear History',
+                cancelText: 'Keep History',
+                isDanger: true
+            });
+
+            if (confirmed) {
+                showToast({
+                    type: 'success',
+                    title: 'History Cleared',
+                    message: 'Your chat history has been cleared',
+                    duration: 3000
+                });
+            }
+        }
+    </script>
+</body>
+</html>

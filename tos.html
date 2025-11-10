@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - MindfulU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Ubuntu Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #333333;
+            line-height: 1.7;
+        }
+
+        .header {
+            padding: 24px 40px;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #718096;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-title {
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            font-family: "Instrument Serif", Georgia, serif;
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 48px;
+            font-style: italic;
+        }
+
+        .content-section {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #718096;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        ul, ol {
+            margin: 16px 0 24px 24px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 12px 0;
+            font-size: 16px;
+            color: #4a5568;
+        }
+
+        strong {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background: rgba(251, 191, 36, 0.08);
+            border-left: 4px solid #f5c563;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+        }
+
+        .info-box {
+            background: rgba(113, 128, 150, 0.08);
+            border-left: 4px solid #718096;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            padding: 12px 24px;
+            background: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+            background: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 24px;
+            }
+
+            .container {
+                padding: 40px 24px;
+            }
+
+            .content-section {
+                padding: 28px 24px;
+                border-radius: 20px;
+            }
+
+            .page-title {
+                margin-bottom: 12px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 18px;
+                margin-top: 24px;
+            }
+
+            p, li {
+                font-size: 15px;
+            }
+        }
+
+        /* Text Selection Styling */
+        ::selection {
+            background: linear-gradient(135deg, rgba(147, 174, 221, 0.4), rgba(162, 177, 203, 0.4));
+            color: #333333;
+        }
+
+        ::-moz-selection {
+            background: linear-gradient(135deg, rgba(147, 174, 221, 0.4), rgba(162, 177, 203, 0.4));
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">MindfulU</a>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">Terms of Service</h1>
+        <p class="last-updated">Last updated: November 1, 2025</p>
+
+        <div class="content-section">
+            <h2>⚠️ Important Notice</h2>
+            <p>
+                Please read these Terms of Service ("Terms") carefully before using the MindfulU website/application 
+                (hereinafter referred to as "this Platform", "the Service", "we", "us", or "our"). By accessing or 
+                using this Platform, you agree to be bound by these Terms.
+            </p>
+            
+            <div class="warning-box">
+                <p>
+                    <strong>If you do not agree to these Terms, you must not access or use this Platform.</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>
+                By clicking "I Understand and Agree", creating an account, or using any part of this Platform, 
+                you acknowledge that you have read, understood, and agree to be bound by these Terms of Service 
+                and our Privacy Policy.
+            </p>
+            
+            <h3>1.1 Eligibility</h3>
+            <p>
+                You must be at least 13 years of age to use this Platform. If you are under 18, you must have 
+                permission from a parent or legal guardian to use this Service. By using this Platform, you 
+                represent and warrant that you meet these eligibility requirements.
+            </p>
+
+            <h3>1.2 Changes to Terms</h3>
+            <p>
+                We reserve the right to modify these Terms at any time. We will notify users of any material 
+                changes by updating the "Last updated" date at the top of this page. Your continued use of 
+                the Platform after such changes constitutes your acceptance of the new Terms.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>2. Nature of Service - Not Medical Advice</h2>
+            
+            <div class="warning-box">
+                <p>
+                    <strong>CRITICAL DISCLAIMER:</strong> The content, resources, assessment tools, or suggestions 
+                    provided by this Platform are for <strong>general informational and educational purposes only</strong> 
+                    and are <strong>NOT professional medical, psychological treatment, or diagnostic advice</strong>.
+                </p>
+            </div>
+
+            <h3>2.1 General Information Only</h3>
+            <p>
+                All information provided through this Platform is derived from public sources, general knowledge, 
+                and artificial intelligence models. This information is:
+            </p>
+            <ul>
+                <li>Not tailored to any individual's specific circumstances, medical history, or personal situation</li>
+                <li>Not a substitute for professional medical institutions, qualified psychologists, psychiatrists, or licensed therapists</li>
+                <li>Not intended to diagnose, treat, cure, or prevent any disease or medical condition</li>
+                <li>Not a replacement for in-person consultation with qualified healthcare professionals</li>
+            </ul>
+
+            <h3>2.2 No Doctor-Patient Relationship</h3>
+            <p>
+                Use of this Platform does not create a doctor-patient, therapist-client, or any other professional 
+                healthcare relationship. The Platform and its operators are not licensed healthcare providers and 
+                do not provide medical or psychological services.
+            </p>
+
+            <h3>2.3 Consult Qualified Professionals</h3>
+            <p>
+                Before making any decisions based on information from this Platform, you must consult with qualified 
+                medical professionals such as:
+            </p>
+            <ul>
+                <li>Licensed physicians or doctors</li>
+                <li>Clinical psychologists or psychiatrists</li>
+                <li>Licensed mental health counselors or therapists</li>
+                <li>Other appropriate healthcare providers</li>
+            </ul>
+            <p>
+                Only qualified professionals can provide diagnoses and treatment plans suitable for your specific needs.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>3. Limitation of Liability</h2>
+            
+            <h3>3.1 Use at Your Own Risk</h3>
+            <p>
+                You acknowledge and agree that you use this Platform entirely at your own risk. The developers, 
+                operators, owners, and affiliates of this Platform (collectively, "we" or "us") assume 
+                <strong>NO RESPONSIBILITY OR LIABILITY</strong> for any damages, injuries, losses, or adverse 
+                consequences resulting from:
+            </p>
+            <ul>
+                <li>Use or reliance on any content, information, or suggestions provided by this Platform</li>
+                <li>Any actions taken or not taken based on information from this Platform</li>
+                <li>Technical errors, bugs, or malfunctions of the Platform</li>
+                <li>Unauthorized access to or alteration of your data</li>
+                <li>Any interruption or cessation of the Service</li>
+            </ul>
+
+            <h3>3.2 Types of Damages Excluded</h3>
+            <p>
+                Our limitation of liability includes, but is not limited to:
+            </p>
+            <ul>
+                <li><strong>Physical harm:</strong> Any bodily injury, illness, or physical damage</li>
+                <li><strong>Psychological harm:</strong> Mental distress, emotional trauma, or worsening of mental health conditions</li>
+                <li><strong>Financial losses:</strong> Any monetary damages, lost income, or financial consequences</li>
+                <li><strong>Indirect damages:</strong> Loss of data, loss of opportunity, reputational harm, or consequential damages</li>
+            </ul>
+
+            <h3>3.3 Maximum Liability</h3>
+            <p>
+                To the fullest extent permitted by applicable law, in no event shall our total liability to you 
+                for all damages, losses, and causes of action exceed the amount you have paid to us (if any) 
+                for accessing this Platform in the twelve (12) months prior to the claim.
+            </p>
+
+            <h3>3.4 Assumption of Risk</h3>
+            <p>
+                By using this Platform, you expressly assume all risks associated with its use, including but not 
+                limited to risks related to your mental health, emotional well-being, and any decisions made based 
+                on information provided by the Platform.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>4. Emergency Situations</h2>
+            
+            <div class="warning-box">
+                <p>
+                    <strong>⚠️ CRITICAL: THIS PLATFORM IS NOT FOR EMERGENCIES</strong>
+                </p>
+            </div>
+
+            <h3>4.1 Immediate Professional Help</h3>
+            <p>
+                If you are experiencing any of the following, <strong>DO NOT rely on this Platform</strong>. 
+                Seek immediate professional help:
+            </p>
+            <ul>
+                <li>Severe mental health crisis or psychiatric emergency</li>
+                <li>Thoughts of suicide or self-harm</li>
+                <li>Thoughts of harming others</li>
+                <li>Severe anxiety, panic attacks, or psychotic episodes</li>
+                <li>Any situation requiring immediate medical or psychological intervention</li>
+            </ul>
+
+            <h3>4.2 Emergency Contact Information</h3>
+            <p><strong>Hong Kong:</strong></p>
+            <ul>
+                <li><strong>Mental Health Support Hotline:</strong> 18111 (24-hour government-run emotional support)</li>
+                <li><strong>The Samaritans:</strong> 2896 0000 (24-hour suicide prevention and emotional support)</li>
+                <li><strong>Emergency Services:</strong> 999</li>
+            </ul>
+            
+            <p><strong>Other Regions:</strong></p>
+            <ul>
+                <li>Contact your local emergency medical services immediately</li>
+                <li>Go to the nearest hospital emergency department</li>
+                <li>Call your country's suicide prevention hotline</li>
+            </ul>
+
+            <h3>4.3 Platform Limitations</h3>
+            <p>
+                This Platform cannot and does not:
+            </p>
+            <ul>
+                <li>Provide emergency response or crisis intervention</li>
+                <li>Monitor users for safety or well-being</li>
+                <li>Detect or prevent self-harm or suicide</li>
+                <li>Replace emergency medical or psychiatric services</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>5. User Responsibilities</h2>
+            
+            <h3>5.1 Accurate Information</h3>
+            <p>
+                You are responsible for providing accurate information when using this Platform. However, you 
+                should never share sensitive personal information, medical records, or identifying details that 
+                could compromise your privacy or security.
+            </p>
+
+            <h3>5.2 Appropriate Use</h3>
+            <p>You agree to use this Platform only for lawful purposes and in accordance with these Terms. You agree NOT to:</p>
+            <ul>
+                <li>Use the Platform in any way that violates applicable laws or regulations</li>
+                <li>Attempt to gain unauthorized access to any part of the Platform or its systems</li>
+                <li>Interfere with or disrupt the Platform's operation or servers</li>
+                <li>Use the Platform to harm, harass, or impersonate others</li>
+                <li>Attempt to reverse engineer, decompile, or extract source code</li>
+                <li>Use automated systems (bots, scrapers) without permission</li>
+            </ul>
+
+            <h3>5.3 Account Security</h3>
+            <p>
+                If the Platform requires account creation, you are responsible for maintaining the confidentiality 
+                of your account credentials and for all activities that occur under your account.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>6. Intellectual Property</h2>
+            
+            <h3>6.1 Platform Ownership</h3>
+            <p>
+                All content, features, and functionality of this Platform, including but not limited to text, 
+                graphics, logos, icons, images, audio clips, software, and the compilation thereof, are the 
+                exclusive property of the Platform operators or its licensors and are protected by copyright, 
+                trademark, and other intellectual property laws.
+            </p>
+
+            <h3>6.2 Limited License</h3>
+            <p>
+                Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license 
+                to access and use the Platform for personal, non-commercial purposes only.
+            </p>
+
+            <h3>6.3 User Content</h3>
+            <p>
+                Any content you submit to the Platform (such as chat messages or feedback) remains your property. 
+                However, by submitting content, you grant us a worldwide, non-exclusive, royalty-free license to 
+                use, store, and process such content solely for the purpose of operating and improving the Platform.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>7. Termination</h2>
+            
+            <h3>7.1 Termination by You</h3>
+            <p>
+                You may stop using the Platform at any time. If you have an account, you may request deletion 
+                of your account and associated data.
+            </p>
+
+            <h3>7.2 Termination by Us</h3>
+            <p>
+                We reserve the right to suspend or terminate your access to the Platform at any time, with or 
+                without notice, for any reason, including but not limited to:
+            </p>
+            <ul>
+                <li>Violation of these Terms of Service</li>
+                <li>Fraudulent, abusive, or illegal activity</li>
+                <li>Extended periods of inactivity</li>
+                <li>Technical or security reasons</li>
+            </ul>
+
+            <h3>7.3 Effect of Termination</h3>
+            <p>
+                Upon termination, your right to use the Platform will immediately cease. Provisions of these 
+                Terms that by their nature should survive termination shall survive, including but not limited 
+                to ownership provisions, warranty disclaimers, and limitations of liability.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>8. Disclaimers and Warranties</h2>
+            
+            <h3>8.1 "As Is" Basis</h3>
+            <p>
+                THIS PLATFORM IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, 
+                EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
+            </p>
+            <ul>
+                <li>Warranties of merchantability or fitness for a particular purpose</li>
+                <li>Warranties of accuracy, reliability, or completeness of information</li>
+                <li>Warranties of uninterrupted or error-free operation</li>
+                <li>Warranties that the Platform will meet your requirements</li>
+            </ul>
+
+            <h3>8.2 No Guarantee of Results</h3>
+            <p>
+                We make no guarantees, representations, or warranties that:
+            </p>
+            <ul>
+                <li>Use of the Platform will improve your mental health or well-being</li>
+                <li>The Platform's assessments or suggestions will be accurate or beneficial</li>
+                <li>The Platform will be available at all times or free from errors</li>
+                <li>Any defects will be corrected</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>9. Governing Law and Dispute Resolution</h2>
+            
+            <h3>9.1 Governing Law</h3>
+            <p>
+                These Terms shall be governed by and construed in accordance with the laws of Hong Kong SAR, 
+                without regard to its conflict of law provisions.
+            </p>
+
+            <h3>9.2 Dispute Resolution</h3>
+            <p>
+                Any disputes arising out of or relating to these Terms or the Platform shall be resolved through 
+                good faith negotiations. If negotiations fail, disputes shall be subject to the exclusive 
+                jurisdiction of the courts of Hong Kong SAR.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>10. Miscellaneous</h2>
+            
+            <h3>10.1 Entire Agreement</h3>
+            <p>
+                These Terms, together with our Privacy Policy, constitute the entire agreement between you and 
+                us regarding the use of the Platform.
+            </p>
+
+            <h3>10.2 Severability</h3>
+            <p>
+                If any provision of these Terms is found to be unenforceable or invalid, that provision shall be 
+                limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain 
+                in full force and effect.
+            </p>
+
+            <h3>10.3 Waiver</h3>
+            <p>
+                No waiver of any term of these Terms shall be deemed a further or continuing waiver of such term 
+                or any other term, and our failure to assert any right or provision under these Terms shall not 
+                constitute a waiver of such right or provision.
+            </p>
+
+            <h3>10.4 Assignment</h3>
+            <p>
+                You may not assign or transfer these Terms or your rights hereunder without our prior written 
+                consent. We may assign these Terms without restriction.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>11. Contact Information</h2>
+            <p>
+                If you have any questions about these Terms of Service, please contact us through the Platform's 
+                feedback mechanism or support channels.
+            </p>
+            
+            <div class="info-box">
+                <p>
+                    <strong>Remember:</strong> This Platform is a supplementary tool for general wellness and 
+                    educational purposes only. Always consult qualified healthcare professionals for medical 
+                    advice, diagnosis, or treatment.
+                </p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+</body>
+</html>

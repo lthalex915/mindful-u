@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulU - Tutorial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Ubuntu Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 40px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: -0.5px;
+        }
+
+        .back-link {
+            color: #718096;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link:hover {
+            color: #333333;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px 20px 80px;
+        }
+
+        .tutorial-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .tutorial-title {
+            font-size: clamp(36px, 6vw, 48px);
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            font-family: "Instrument Serif", Georgia, serif;
+        }
+
+        .tutorial-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Section Card */
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #fdffb6, #ffd6a5);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            flex-shrink: 0;
+        }
+
+        .section-card h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: -0.5px;
+        }
+
+        .section-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-card p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .section-card ul,
+        .section-card ol {
+            margin: 16px 0 16px 24px;
+            color: #4a5568;
+        }
+
+        .section-card li {
+            margin: 10px 0;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .section-card li strong {
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .section-card a {
+            color: #4299e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .section-card a:hover {
+            color: #2b6cb0;
+            text-decoration: underline;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #4299e1;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+
+        .info-box strong {
+            color: #2b6cb0;
+            font-weight: 600;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        .info-box ul {
+            margin: 12px 0 0 20px;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+
+        .warning-box strong {
+            color: #d97706;
+            font-weight: 600;
+        }
+
+        .warning-box p {
+            margin: 0;
+        }
+
+        .warning-box ul {
+            margin: 12px 0 0 20px;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .feature-item {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Code/Keyboard */
+        .keyboard-key {
+            display: inline-block;
+            background: #ffffff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: "Courier New", monospace;
+            font-weight: 600;
+            color: #333333;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 24px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .main-content {
+                padding: 32px 16px 60px;
+            }
+
+            .tutorial-header {
+                margin-bottom: 40px;
+            }
+
+            .tutorial-subtitle {
+                font-size: 14px;
+            }
+
+            .section-card {
+                padding: 28px 24px;
+            }
+
+            .section-card h2 {
+                font-size: 24px;
+            }
+
+            .section-card h3 {
+                font-size: 18px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 16px 20px;
+            }
+
+            .section-card {
+                padding: 24px 20px;
+            }
+
+            .info-box,
+            .warning-box {
+                padding: 16px 20px;
+            }
+        }
+
+        /* Accessibility */
+        a:focus-visible {
+            outline: 2px solid #718096;
+            outline-offset: 4px;
+        }
+
+        /* Text Selection Styling */
+        ::selection {
+            background: linear-gradient(135deg, rgba(147, 174, 221, 0.4), rgba(162, 177, 203, 0.4));
+            color: #333333;
+        }
+
+        ::-moz-selection {
+            background: linear-gradient(135deg, rgba(147, 174, 221, 0.4), rgba(162, 177, 203, 0.4));
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">MindfulU</div>
+        <a href="portal.html" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to Portal
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tutorial-container">
+            <!-- Header -->
+            <div class="tutorial-header">
+                <h1 class="tutorial-title">📚 How to Use MindfulU</h1>
+                <p class="tutorial-subtitle">
+                    Your comprehensive guide to getting the most out of your empathetic AI companion for mental wellness
+                </p>
+            </div>
+
+            <!-- Getting Started -->
+            <div class="section-card" id="ai-configuration">
+                <div class="section-header">
+                    <div class="step-number">1</div>
+                    <h2>Getting Started</h2>
+                </div>
+
+                <h3>⚙️ AI Configuration (First-Time Setup)</h3>
+                <p>Before you can start chatting with MindfulU's AI, you need to configure the AI settings:</p>
+                <ol>
+                    <li>Click on the <strong>"⚙️ AI Configuration"</strong> section at the top of the page</li>
+                    <li><strong>Get an API Key:</strong> Visit <a href="https://openrouter.ai/" target="_blank">OpenRouter.ai</a> and sign up for a free account to get your API key</li>
+                    <li>Enter your <strong>OpenRouter API Key</strong> (starts with "sk-or-...")</li>
+                    <li>Enter a <strong>Model Identifier</strong> (e.g., "deepseek/deepseek-chat-v3-0324:free" for free models)</li>
+                    <li>Click <strong>"Save Configuration"</strong></li>
+                    <li>Wait for the system to validate your credentials - you'll see "✓ AI configuration successful!"</li>
+                </ol>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> Free model options include:
+                    <ul>
+                        <li>deepseek/deepseek-chat-v3-0324:free</li>
+                        <li>google/gemini-1.5-flash:free</li>
+                        <li>openai/gpt-4o-mini:free</li>
+                        <li>anthropic/claude-3-haiku:free</li>
+                    </ul>
+                </div>
+
+                <h3>📸 Camera Permission</h3>
+                <p>MindfulU uses your camera for emotion detection. When you first load the app, you'll be asked to grant camera permission. This allows the app to:</p>
+                <ul>
+                    <li>Analyze your facial expressions in real-time</li>
+                    <li>Track your stress levels throughout the conversation</li>
+                    <li>Provide more personalized and empathetic responses</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Privacy Note:</strong> All emotion detection happens locally in your browser. No images or video are sent to any server or stored anywhere. Your privacy is completely protected.
+                </div>
+            </div>
+
+            <!-- Main Features -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="step-number">2</div>
+                    <h2>Main Features</h2>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>💬 AI Chat Companion</h4>
+                        <p>Have natural conversations with an empathetic AI that understands and supports you through daily challenges.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h4>📊 Stress Level Monitor</h4>
+                        <p>Real-time stress tracking based on facial expressions and conversation patterns displayed at the top of the page.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h4>😊 Emotion Detection</h4>
+                        <p>Track 7 different emotions (happy, sad, angry, fearful, surprised, disgusted, neutral) in real-time.</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <h4>💡 Smart Prompts</h4>
+                        <p>Get personalized conversation suggestions based on your emotional state and stress level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Using the Chat -->
+            <div class="section-card" id="chat-interface">
+                <div class="section-header">
+                    <div class="step-number">3</div>
+                    <h2>Using the Chat Interface</h2>
+                </div>
+
+                <h3>💬 Sending Messages</h3>
+                <p>There are multiple ways to send a message:</p>
+                <ul>
+                    <li>Type your message and press <span class="keyboard-key">Enter</span></li>
+                    <li>Click the <strong>send button</strong> (✈️ icon)</li>
+                    <li>For multi-line messages, press <span class="keyboard-key">Ctrl+Enter</span> to create a new line</li>
+                </ul>
+
+                <h3>📝 Message Input Tips</h3>
+                <ul>
+                    <li>The text box automatically expands as you type (up to 200px height)</li>
+                    <li>After each AI response, you'll see a <strong>recommended prompt</strong> in the input box placeholder - these are personalized suggestions for what to talk about next</li>
+                    <li>Share honestly about your feelings - MindfulU is here to listen</li>
+                    <li>You can discuss work stress, academic challenges, daily life, or anything on your mind</li>
+                </ul>
+
+                <h3>🗑️ Clearing History</h3>
+                <p>To start a fresh conversation, click the <strong>trash icon</strong> (🗑️) in the Emotions panel. This will:</p>
+                <ul>
+                    <li>Clear all chat history</li>
+                    <li>Reset the recommendation prompt</li>
+                    <li>Start a new conversation from scratch</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Note:</strong> Clearing history cannot be undone. Your conversation will be permanently deleted.
+                </div>
+            </div>
+
+            <!-- Understanding Your Data -->
+            <div class="section-card" id="stress-emotions">
+                <div class="section-header">
+                    <div class="step-number">4</div>
+                    <h2>Understanding Your Stress & Emotions</h2>
+                </div>
+
+                <h3>📈 Stress Level Bar</h3>
+                <p>The stress bar at the top shows your current stress level (0-100%):</p>
+                <ul>
+                    <li><strong style="color: #4caf50">🟢 0-30%: Low Stress</strong> - You're feeling calm and relaxed</li>
+                    <li><strong style="color: #f5c563">🟡 31-65%: Medium Stress</strong> - Moderate stress levels, manageable</li>
+                    <li><strong style="color: #e88b8b">🔴 66-100%: High Stress</strong> - Elevated stress, consider taking a break</li>
+                </ul>
+
+                <p>Your stress level is calculated from:</p>
+                <ul>
+                    <li><strong>60%</strong> - Your conversation patterns and content</li>
+                    <li><strong>40%</strong> - Real-time facial expression analysis</li>
+                </ul>
+
+                <h3>😊 Emotion Tracking</h3>
+                <p>The Emotions panel (bottom-right) shows real-time detection of 7 emotions:</p>
+                <ul>
+                    <li>😊 <strong>Happy</strong> - Joy and contentment</li>
+                    <li>😢 <strong>Sad</strong> - Sadness or disappointment</li>
+                    <li>😠 <strong>Angry</strong> - Frustration or anger</li>
+                    <li>😨 <strong>Fearful</strong> - Anxiety or worry</li>
+                    <li>😲 <strong>Surprised</strong> - Surprise or shock</li>
+                    <li>🤢 <strong>Disgusted</strong> - Disgust or discomfort</li>
+                    <li>😐 <strong>Neutral</strong> - Calm, neutral state</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tip:</strong> The AI uses your current emotion to provide more contextual and empathetic responses. For example, if you're showing high stress, it might suggest relaxation techniques.
+                </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="step-number">5</div>
+                    <h2>Best Practices</h2>
+                </div>
+
+                <h3>✅ Do's</h3>
+                <ul>
+                    <li><strong>Be honest</strong> about your feelings and challenges</li>
+                    <li><strong>Use the recommended prompts</strong> if you're not sure what to talk about</li>
+                    <li><strong>Take breaks</strong> if your stress level is consistently high</li>
+                    <li><strong>Position your face</strong> in view of the camera for accurate emotion detection</li>
+                    <li><strong>Chat regularly</strong> - the more you use it, the better it understands your patterns</li>
+                </ul>
+
+                <h3>❌ Don'ts</h3>
+                <ul>
+                    <li><strong>Don't rely solely on MindfulU</strong> for serious mental health issues - seek professional help if needed</li>
+                    <li><strong>Don't share sensitive personal information</strong> - while data is stored locally, it's best to be cautious</li>
+                    <li><strong>Don't use in emergency situations</strong> - call emergency services if you're in crisis</li>
+                    <li><strong>Don't expect medical diagnosis</strong> - this is a support tool, not a medical device</li>
+                </ul>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="step-number">6</div>
+                    <h2>Troubleshooting</h2>
+                </div>
+
+                <h3>🚫 Camera Not Working?</h3>
+                <ul>
+                    <li>Check if you granted camera permission in your browser</li>
+                    <li>Make sure no other app is using your camera (close other video call apps)</li>
+                    <li>Try refreshing the page</li>
+                    <li>If using file://, run a local server instead (e.g., Live Server in VSCode)</li>
+                </ul>
+
+                <h3>🤖 AI Not Responding?</h3>
+                <ul>
+                    <li>Verify your API key is correct and active</li>
+                    <li>Check your internet connection</li>
+                    <li>Try a different model identifier</li>
+                    <li>You may have hit a rate limit - wait a few minutes and try again</li>
+                </ul>
+
+                <h3>📊 Stress/Emotion Not Updating?</h3>
+                <ul>
+                    <li>Ensure your face is clearly visible to the camera</li>
+                    <li>Try adjusting lighting in your room</li>
+                    <li>Check if camera permission is granted</li>
+                    <li>Refresh the page to reset emotion detection</li>
+                </ul>
+
+                <h3>💾 Data Not Saving?</h3>
+                <ul>
+                    <li>Check if your browser allows localStorage</li>
+                    <li>Try using a different browser (Chrome, Firefox, Edge)</li>
+                    <li>Disable private/incognito mode</li>
+                </ul>
+            </div>
+
+            <!-- Need Help -->
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="step-number">7</div>
+                    <h2>Need Help?</h2>
+                </div>
+
+                <p>If you're experiencing a mental health crisis or need immediate support:</p>
+
+                <div class="warning-box">
+                    <strong>Emergency Resources:</strong>
+                    <ul>
+                        <li><strong>Hong Kong:</strong> Mental Health Support Hotline <strong>18111</strong> (24-hour) or The Samaritans <strong>2896 0000</strong></li>
+                        <li><strong>International:</strong> Contact your local emergency services or crisis helpline</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 20px;">
+                    Remember: MindfulU is a supportive companion, not a replacement for professional mental health care. If you're struggling, please reach out to a qualified mental health professional.
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

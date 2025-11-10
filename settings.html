@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindfulU - Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="notification.css">
+    <script src="notification.js"></script>
+    <style>
+        body {
+            font-family: "Ubuntu Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fa;
+        }
+
+        .page-header {
+            padding: 24px 40px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            letter-spacing: -0.5px;
+        }
+
+        .back-link {
+            color: #718096;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .back-link:hover {
+            color: #333333;
+        }
+
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+            font-family: "Instrument Serif", Georgia, serif;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .settings-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+
+        .settings-section {
+            margin-bottom: 32px;
+        }
+
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-description {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: "Ubuntu Sans", sans-serif;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #718096;
+            box-shadow: 0 0 0 3px rgba(113, 128, 150, 0.1);
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .model-examples {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .model-examples-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 8px;
+        }
+
+        .model-example {
+            font-size: 12px;
+            color: #6b7280;
+            padding: 4px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Ubuntu Sans", sans-serif;
+        }
+
+        .btn-primary {
+            background: #000000;
+            color: #ffffff;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #1a1a1a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .status-message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 32px 0;
+        }
+
+        .danger-zone {
+            border: 2px solid #fee2e2;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fef2f2;
+        }
+
+        .danger-zone .section-title {
+            color: #991b1b;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 20px 24px;
+            }
+
+            .settings-card {
+                padding: 24px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 16px 20px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .settings-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <div class="logo">MindfulU</div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <a href="tutorial.html#ai-configuration" class="tutorial-icon" title="Learn about AI configuration" style="color: #718096; text-decoration: none; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; transition: color 0.3s ease;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span>Tutorial</span>
+            </a>
+            <a href="portal.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Portal
+            </a>
+        </div>
+    </header>
+
+    <div class="settings-container">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Configure your AI model and personalize your experience</p>
+
+        <!-- AI Configuration Card -->
+        <div class="settings-card">
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"/>
+                    </svg>
+                    AI Configuration
+                </h2>
+                <p class="section-description">
+                    Configure your OpenRouter API key and select an AI model for the chatbot. Your API key is stored locally and never sent to our servers.
+                </p>
+
+                <div class="form-group">
+                    <label for="apiKey" class="form-label">OpenRouter API Key</label>
+                    <input 
+                        type="password" 
+                        id="apiKey" 
+                        class="form-input" 
+                        placeholder="sk-or-v1-..."
+                        autocomplete="off"
+                    >
+                    <p class="form-hint">
+                        Get your API key from <a href="https://openrouter.ai/keys" target="_blank" style="color: #2563eb; text-decoration: underline;">OpenRouter</a>
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label for="modelId" class="form-label">AI Model</label>
+                    <input 
+                        type="text" 
+                        id="modelId" 
+                        class="form-input" 
+                        placeholder="e.g., minimax/minimax-m2:free"
+                        autocomplete="off"
+                    >
+                    <p class="form-hint">
+                        Enter the model identifier from OpenRouter's model list
+                    </p>
+                    
+                    <div class="model-examples">
+                        <div class="model-examples-title">Popular Free Models:</div>
+                        <div class="model-example">• deepseek/deepseek-chat-v3-0324:free</div>
+                        <div class="model-example">• minimax/minimax-m2:free</div>
+                        <div class="model-example">• cognitivecomputations/dolphin-mistral-24b-venice-edition:free</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="saveBtn" class="btn btn-primary" disabled>Save Configuration</button>
+                    <button id="testBtn" class="btn btn-secondary">Test Connection</button>
+                </div>
+
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Danger Zone -->
+            <div class="danger-zone">
+                <h2 class="section-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    Danger Zone
+                </h2>
+                <p class="section-description">
+                    These actions are irreversible. Please proceed with caution.
+                </p>
+                <button id="clearDataBtn" class="btn btn-danger">Clear All Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load saved configuration
+        function loadConfiguration() {
+            const apiKey = localStorage.getItem('mindfulU_apiKey') || '';
+            const modelId = localStorage.getItem('mindfulU_model') || '';
+            
+            document.getElementById('apiKey').value = apiKey;
+            document.getElementById('modelId').value = modelId;
+            
+            updateSaveButton();
+        }
+
+        // Update save button state
+        function updateSaveButton() {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const modelId = document.getElementById('modelId').value.trim();
+            const saveBtn = document.getElementById('saveBtn');
+            
+            saveBtn.disabled = !apiKey || !modelId;
+        }
+
+        // Show status message
+        function showStatus(message, type = 'info') {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.className = `status-message ${type}`;
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // Save configuration
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const modelId = document.getElementById('modelId').value.trim();
+            
+            if (!apiKey || !modelId) {
+                showStatus('Please fill in all fields', 'error');
+                return;
+            }
+            
+            localStorage.setItem('mindfulU_apiKey', apiKey);
+            localStorage.setItem('mindfulU_model', modelId);
+            
+            showStatus('Configuration saved successfully!', 'success');
+        });
+
+        // Test connection
+        document.getElementById('testBtn').addEventListener('click', async () => {
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const modelId = document.getElementById('modelId').value.trim();
+            
+            if (!apiKey || !modelId) {
+                showStatus('Please enter API key and model ID first', 'error');
+                return;
+            }
+            
+            showStatus('Testing connection...', 'info');
+            
+            try {
+                const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json',
+                        'HTTP-Referer': window.location.href,
+                        'X-Title': 'MindfulU'
+                    },
+                    body: JSON.stringify({
+                        model: modelId,
+                        messages: [{ role: 'user', content: 'Hello' }],
+                        max_tokens: 10
+                    })
+                });
+                
+                if (response.ok) {
+                    showStatus('✓ Connection successful! Configuration is working.', 'success');
+                } else {
+                    const error = await response.json();
+                    showStatus(`✗ Connection failed: ${error.error?.message || 'Unknown error'}`, 'error');
+                }
+            } catch (error) {
+                showStatus(`✗ Connection failed: ${error.message}`, 'error');
+            }
+        });
+
+        // Clear all data
+        document.getElementById('clearDataBtn').addEventListener('click', async () => {
+            const confirmed = await confirmDialog({
+                type: 'warning',
+                title: 'Clear All Data',
+                subtitle: 'This action cannot be undone',
+                message: 'Are you sure you want to clear all data? This will permanently remove your API key, chat history, and all settings.',
+                confirmText: 'Clear All Data',
+                cancelText: 'Cancel',
+                isDanger: true
+            });
+
+            if (confirmed) {
+                localStorage.clear();
+                document.getElementById('apiKey').value = '';
+                document.getElementById('modelId').value = '';
+                updateSaveButton();
+                
+                showToast({
+                    type: 'success',
+                    title: 'Data Cleared',
+                    message: 'All data has been cleared successfully',
+                    duration: 3000
+                });
+            }
+        });
+
+        // Input event listeners
+        document.getElementById('apiKey').addEventListener('input', updateSaveButton);
+        document.getElementById('modelId').addEventListener('input', updateSaveButton);
+
+        // Load configuration on page load
+        window.addEventListener('load', loadConfiguration);
+    </script>
+</body>
+</html>
