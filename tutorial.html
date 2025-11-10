@@ -370,24 +370,24 @@
                 </div>
 
                 <h3>⚙️ AI Configuration (First-Time Setup)</h3>
-                <p>Before you can start chatting with MindfulU's AI, you need to configure the AI settings:</p>
+                <p>Before you can start chatting with MindfulU's AI, configure the AI settings in Settings → AI Configuration:</p>
                 <ol>
-                    <li>Click on the <strong>"⚙️ AI Configuration"</strong> section at the top of the page</li>
-                    <li><strong>Get an API Key:</strong> Visit <a href="https://openrouter.ai/" target="_blank">OpenRouter.ai</a> and sign up for a free account to get your API key</li>
-                    <li>Enter your <strong>OpenRouter API Key</strong> (starts with "sk-or-...")</li>
-                    <li>Enter a <strong>Model Identifier</strong> (e.g., "deepseek/deepseek-chat-v3-0324:free" for free models)</li>
-                    <li>Click <strong>"Save Configuration"</strong></li>
-                    <li>Wait for the system to validate your credentials - you'll see "✓ AI configuration successful!"</li>
+                    <li><strong>Choose a Provider:</strong> OpenRouter, OpenAI Compatible, or Deepseek</li>
+                    <li><strong>If OpenAI Compatible:</strong> enter the <strong>Base URL</strong> (e.g., <code>https://api.openai.com/v1</code>)</li>
+                    <li><strong>Enter your API key</strong> from the selected provider</li>
+                    <li><strong>Enter a Model Identifier</strong> supported by that provider (see examples below)</li>
+                    <li>Optionally, paste a JSON into <strong>Import Config (JSON)</strong> and click <em>Import</em></li>
+                    <li>Click <strong>Test Connection</strong>, then <strong>Save Configuration</strong></li>
                 </ol>
 
                 <div class="info-box">
-                    <strong>💡 Tip:</strong> Free model options include:
+                    <strong>Examples:</strong>
                     <ul>
-                        <li>deepseek/deepseek-chat-v3-0324:free</li>
-                        <li>google/gemini-1.5-flash:free</li>
-                        <li>openai/gpt-4o-mini:free</li>
-                        <li>anthropic/claude-3-haiku:free</li>
+                        <li><strong>OpenRouter:</strong> Model e.g. <code>deepseek/deepseek-chat-v3-0324:free</code></li>
+                        <li><strong>OpenAI Compatible:</strong> Base URL <code>https://api.openai.com/v1</code>, Model e.g. <code>gpt-4o-mini</code></li>
+                        <li><strong>Deepseek:</strong> Base URL <code>https://api.deepseek.com/v1</code>, Model <code>deepseek-chat</code></li>
                     </ul>
+                    <p style="margin-top: 8px;">For other providers or gateways, refer to the service provider’s documentation to find the correct Base URL, model IDs, and key format.</p>
                 </div>
 
                 <h3>📸 Camera Permission</h3>
